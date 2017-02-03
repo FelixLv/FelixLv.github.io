@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>spring-boot-features-custom-failure-analyzer | 一枚程序猿的自娱自乐</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自定义FailureAnalyzerStep1:自定义异常123456public class BusinessException extends RuntimeException &amp;#123;    public BusinessException(String msg)&amp;#123;        super(msg);    &amp;#125;&amp;#125;
+Step2:自定义FailureAnaly">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring-boot-features-custom-failure-analyzer">
+<meta property="og:url" content="http://yoursite.com/2017/02/03/spring-boot-features-custom-failure-analyzer-md/index.html">
+<meta property="og:site_name" content="一枚程序猿的自娱自乐">
+<meta property="og:description" content="自定义FailureAnalyzerStep1:自定义异常123456public class BusinessException extends RuntimeException &amp;#123;    public BusinessException(String msg)&amp;#123;        super(msg);    &amp;#125;&amp;#125;
+Step2:自定义FailureAnaly">
+<meta property="og:updated_time" content="2017-02-03T08:30:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring-boot-features-custom-failure-analyzer">
+<meta name="twitter:description" content="自定义FailureAnalyzerStep1:自定义异常123456public class BusinessException extends RuntimeException &amp;#123;    public BusinessException(String msg)&amp;#123;        super(msg);    &amp;#125;&amp;#125;
+Step2:自定义FailureAnaly">
+  
+    <link rel="alternate" href="/atom.xml" title="一枚程序猿的自娱自乐" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一枚程序猿的自娱自乐</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring-boot-features-custom-failure-analyzer-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/03/spring-boot-features-custom-failure-analyzer-md/" class="article-date">
+  <time datetime="2017-02-03T08:29:33.000Z" itemprop="datePublished">2017-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spring-boot-features-custom-failure-analyzer
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="自定义FailureAnalyzer"><a href="#自定义FailureAnalyzer" class="headerlink" title="自定义FailureAnalyzer"></a>自定义FailureAnalyzer</h3><h4 id="Step1-自定义异常"><a href="#Step1-自定义异常" class="headerlink" title="Step1:自定义异常"></a>Step1:自定义异常</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BusinessException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BusinessException</span><span class="params">(String msg)</span></span>&#123;</div><div class="line">        <span class="keyword">super</span>(msg);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Step2-自定义FailureAnalyzer"><a href="#Step2-自定义FailureAnalyzer" class="headerlink" title="Step2:自定义FailureAnalyzer"></a>Step2:自定义FailureAnalyzer</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BusinessFailureAnalyzer</span> <span class="keyword">extends</span> <span class="title">AbstractFailureAnalyzer</span>&lt;<span class="title">BusinessException</span>&gt; </span>&#123;</div><div class="line">    BusinessFailureAnalyzer()&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> FailureAnalysis <span class="title">analyze</span><span class="params">(Throwable throwable, BusinessException e)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FailureAnalysis(<span class="string">"business description"</span>,<span class="string">"business action"</span>,e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Step3-配置FailureAnalyzer"><a href="#Step3-配置FailureAnalyzer" class="headerlink" title="Step3:配置FailureAnalyzer"></a>Step3:配置FailureAnalyzer</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">org.springframework.boot.diagnostics.FailureAnalyzer=\</div><div class="line">org.felix.spring.boot.analyzer.BusinessFailureAnalyzer</div></pre></td></tr></table></figure>
+<h4 id="Step4-定义一个Service被Spring初始化抛出该异常"><a href="#Step4-定义一个Service被Spring初始化抛出该异常" class="headerlink" title="Step4:定义一个Service被Spring初始化抛出该异常"></a>Step4:定义一个Service被Spring初始化抛出该异常</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EchoService</span> <span class="keyword">implements</span> <span class="title">InitializingBean</span></span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> BusinessException(<span class="string">"business exception"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Step5-构建一个Spring-Application"><a href="#Step5-构建一个Spring-Application" class="headerlink" title="Step5:构建一个Spring Application"></a>Step5:构建一个Spring Application</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableAutoConfiguration</span></div><div class="line"><span class="meta">@ComponentScan</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationWithBusinessException</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">   SpringApplication.run(ApplicationWithBusinessException.class,args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Step6-运行Spring-Application"><a href="#Step6-运行Spring-Application" class="headerlink" title="Step6:运行Spring Application"></a>Step6:运行Spring Application</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">***************************</div><div class="line">APPLICATION FAILED TO START</div><div class="line">***************************</div><div class="line"></div><div class="line">Description:</div><div class="line"></div><div class="line">business description</div><div class="line"></div><div class="line">Action:</div><div class="line"></div><div class="line">business action</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/03/spring-boot-features-custom-failure-analyzer-md/" data-id="ciypjwml10000ev3q4xdcjban" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-boot/">spring-boot</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/03/spring-boot-application-starters-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">spring-boot-application-starters</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring-boot/">spring-boot</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/spring-boot/" style="font-size: 10px;">spring-boot</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/03/spring-boot-features-custom-failure-analyzer-md/">spring-boot-features-custom-failure-analyzer</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/03/spring-boot-application-starters-md/">spring-boot-application-starters</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/03/spring-boot-features-spring-application-md/">spring-boot-features-spring-application</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 felix<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
